@@ -3,6 +3,9 @@ package AlgoRecuit;
 import java.util.Arrays;
 import java.util.Random;
 
+import static AlgoRecuit.Util.getFitness;
+import static AlgoRecuit.Util.getVoisinage;
+
 /**
  * Created by sam on 15/03/17.
  */
@@ -29,34 +32,10 @@ public class RecuitSimule {
         this.t0=tempInit;
         this.mu=mu;
         this.solFinal=solInitial;
-        this.fitnessFinal=getFitness(solFinal);
+        this.fitnessFinal=getFitness(solFinal, n);
         algoRecuit();
     }
 
-
-
-
-
-    public int[] getVoisinage(int[] solActuelle){
-        int rand1 = random.nextInt(n-1);
-        int rand2 = random.nextInt(n-1);
-        int[] solNew = solActuelle.clone();
-        solNew[rand1]=solActuelle[rand2];
-        solNew[rand2]=solActuelle[rand1];
-        return solNew;
-    }
-
-    public int getFitness(int[] solCandidate){
-        int fitness = 0;
-        for(int i=0; i<n; i++){
-            for(int j=i; j<n; j++){
-                if(Math.abs(solCandidate[i]-solCandidate[j])==Math.abs(i-j)){
-                    fitness++;
-                }
-            }
-        }
-        return fitness;
-    }
 
     public void algoRecuit(){
         double temp=t0;
@@ -64,13 +43,13 @@ public class RecuitSimule {
         int[] solCandidate;
         while(temp>0.2){
             for(int l=1; l<maxIteration;l++){
-                solCandidate=getVoisinage(solActuel);
-                int dFitness = getFitness(solCandidate)-getFitness(solActuel);
+                solCandidate=getVoisinage(solActuel, n);
+                int dFitness = getFitness(solCandidate, n)-getFitness(solActuel, n);
                 if(dFitness<=0){
                     solActuel=solCandidate;
-                    if(getFitness(solActuel)<fitnessFinal){
+                    if(getFitness(solActuel, n)<fitnessFinal){
                         solFinal=solActuel;
-                        fitnessFinal=getFitness(solFinal);
+                        fitnessFinal=getFitness(solFinal, n);
                     }
                 }else{
                     if(random.nextDouble()<=Math.exp(-dFitness/temp)){
