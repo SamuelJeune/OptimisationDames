@@ -3,6 +3,7 @@ package AlgoRecuit;
 import java.util.Arrays;
 import java.util.Random;
 
+import static AlgoRecuit.Util.affichagejolidetheo;
 import static AlgoRecuit.Util.getFitness;
 import static AlgoRecuit.Util.getVoisinage;
 
@@ -63,5 +64,8 @@ public class RecuitSimule {
 
         }
         System.out.println(Arrays.toString(solFinal));
+        System.out.println("fitness = " + getFitness(solFinal, n));
+        affichagejolidetheo(solFinal);
+
     }
 }

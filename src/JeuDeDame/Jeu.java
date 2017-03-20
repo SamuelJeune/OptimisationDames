@@ -13,8 +13,8 @@ public class Jeu {
 
 
     public static void main(String[] args){
-//        RecuitSimule recuitSimule = new RecuitSimule(100,3,100,0.5);
-        Tabou tabou = new Tabou(20, 10);
+       RecuitSimule recuitSimule = new RecuitSimule(10,30,100,0.2);
+        Tabou tabou = new Tabou(200000, 1000);
     }
 
 

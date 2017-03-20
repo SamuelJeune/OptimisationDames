@@ -20,7 +20,7 @@ public class Util {
     public static int getFitness(int[] solCandidate, int n){
         int fitness = 0;
         for(int i=0; i<n; i++){
-            for(int j=i; j<n; j++){
+            for(int j=i+1; j<n; j++){
                 if(Math.abs(solCandidate[i]-solCandidate[j])==Math.abs(i-j)){
                     fitness++;
                 }
@@ -43,5 +43,19 @@ public class Util {
         solNew[rand1]=solActuelle[rand2];
         solNew[rand2]=solActuelle[rand1];
         return solNew;
+    }
+
+    public static void affichagejolidetheo(int[] solFinal){
+        for(int i=0;i<solFinal.length;i++){
+            System.out.print("[");
+            for(int j=0; j<solFinal.length; j++){
+                if(solFinal[j]==i){
+                    System.out.print(" Q");
+                } else {
+                    System.out.print(" -");
+                }
+            }
+            System.out.println(" ]");
+        }
     }
 }

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static AlgoRecuit.Util.affichagejolidetheo;
+import static AlgoRecuit.Util.getFitness;
+
 /**
  * Created by Sam on 20/03/2017.
  */
@@ -26,10 +29,13 @@ public class Tabou {
         }
         this.n=n;
         AlgoTabou();
+        this.nbvoisin=n*20;
+        solFinal=solInitial;
     }
 
     public void AlgoTabou(){
         int[] solActuel = solInitial;
+        solFinal=solInitial;
         while(i!=nmax){
             Action action = Util.getAction(solActuel, n);
             int[] solCandidate=Util.getVoisinByAction(action, solActuel);
@@ -53,8 +59,12 @@ public class Tabou {
                 T.remove(0);
             }
             i++;
+            if(getFitness(solFinal,n)>getFitness(solActuel,n)){
+                solFinal=solActuel;
+            }
         }
-        solFinal=solActuel;
         System.out.println(Arrays.toString(solFinal));
+        affichagejolidetheo(solFinal);
+        System.out.println(getFitness(solFinal, n));
     }
 }
