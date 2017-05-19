@@ -27,4 +27,24 @@ public class Action {
                 ", B=" + B +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Action action = (Action) o;
+
+        if (A != action.A) return false;
+        return B == action.B;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = A;
+        result = 31 * result + B;
+        return result;
+    }
+
+
 }

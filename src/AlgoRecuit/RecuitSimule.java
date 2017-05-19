@@ -5,21 +5,21 @@ import java.util.Random;
 
 import static AlgoRecuit.Util.affichagejolidetheo;
 import static AlgoRecuit.Util.getFitness;
-import static AlgoRecuit.Util.getVoisinage;
+import static AlgoRecuit.Util.getRandNeighbor;
 
 /**
  * Created by sam on 15/03/17.
  */
 public class RecuitSimule {
 
-    int[] solInitial;
-    double t0;
-    int n;
-    int maxIteration;
-    double mu;
-    int[] solFinal;
-    int fitnessFinal;
-    Random random = new Random();
+    private int[] solInitial;
+    private double t0;
+    private int n;
+    private int maxIteration;
+    private double mu;
+    private int[] solFinal;
+    private int fitnessFinal;
+    private Random random = new Random();
 
 
 
@@ -44,7 +44,7 @@ public class RecuitSimule {
         int[] solCandidate;
         while(temp>0.2){
             for(int l=1; l<maxIteration;l++){
-                solCandidate=getVoisinage(solActuel, n);
+                solCandidate= getRandNeighbor(solActuel, n);
                 int dFitness = getFitness(solCandidate, n)-getFitness(solActuel, n);
                 if(dFitness<=0){
                     solActuel=solCandidate;
