@@ -1,4 +1,7 @@
-package AlgoRecuit;
+package algo.tabou;
+
+import util.Action;
+import util.Util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +20,7 @@ public class Tabou {
     public Tabou(int nmax, int n) {
         this.i = 0;
         this.nmax = nmax;
-        solInitial=Util.getInitSolution(n);
+        solInitial= Util.getInitSolution(n);
         this.n=n;
         AlgoTabou();
         solFinal=solInitial;

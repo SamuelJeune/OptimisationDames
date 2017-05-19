@@ -1,4 +1,4 @@
-package AlgoRecuit;
+package util;
 
 /**
  * Created by Sam on 20/03/2017.

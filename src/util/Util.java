@@ -1,4 +1,4 @@
-package AlgoRecuit;
+package util;
 
 import java.util.ArrayList;
 import java.util.Random;

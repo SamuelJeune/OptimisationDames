@@ -1,4 +1,7 @@
-package AlgoRecuit;
+package algo.genetic;
+
+import util.Pair;
+import util.Util;
 
 import java.util.*;
 
