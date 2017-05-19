@@ -111,7 +111,6 @@ public class Util {
         while(i<tabouList.size() && !tabou){
             if(action.equals(tabouList.get(i))){
                 tabou = true;
-                System.out.println("tabou");
             }
             i++;
         }

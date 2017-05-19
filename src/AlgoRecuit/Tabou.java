@@ -26,24 +26,26 @@ public class Tabou {
     public void AlgoTabou(){
         solFinal=solInitial;
         int currentFitness = Integer.MAX_VALUE;
+        int fitnessMin = Integer.MAX_VALUE;
         int fitness;
+        Action action;
+        int[] solCandidate;
         ArrayList<Action> actions = Util.getListActions(n,T);
         while(i!=nmax && currentFitness>0 && actions.size()>0){
-            Action action = Util.getBestAction(solFinal, n,actions);
-            System.out.println(action);
-            int[] solCandidate=Util.getNeighborByAction(action,solFinal);
+            action = Util.getBestAction(solFinal, n,actions);
+            solCandidate=Util.getNeighborByAction(action,solFinal);
             fitness = Util.getFitness(solCandidate,n);
             if(fitness<=currentFitness){
                 T.add(new Action(action.getA(),action.getB()));
-                System.out.println("on ajoute : "+T.size()+" \n"+T);
             }
             if(T.size()>n-2){
                 T.remove(0);
             }
-            if(currentFitness>fitness){
+            if(fitness<=fitnessMin){
+                fitnessMin = fitness;
                 solFinal=solCandidate;
-                currentFitness = fitness;
             }
+            currentFitness = fitness;
             actions = Util.getListActions(n,T);
             i++;
         }
