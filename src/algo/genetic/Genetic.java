@@ -88,12 +88,20 @@ public class Genetic {
     public void croisement(){
         int[] board;
         int k;
+        /**
+         * this list will stock all the values already used to be sure
+         * that we don't use  twice the same value which can create horizontals conflicts
+         * that are not taken in account in our fitness function
+         */
         ArrayList<Integer> usedList = new ArrayList<>();
         currentPop.clear();
         for(int i=0;i<nbPop*2;i+=2){
             usedList.clear();
             board = new int[n];
+            /**we draw the number of value we'll take on the first relative */
             int rand1 = random.nextInt(n);
+            /**then we draw the beging of the values we'll take on the first relative
+            (all the other values will came from the second relative*/
             int rand2 = random.nextInt(n-rand1);
             for(int j=rand2;j<rand1+rand2;j++){
                 board[j]=choosenPop.get(i).getBoard()[j];
