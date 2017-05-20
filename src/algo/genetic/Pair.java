@@ -1,4 +1,4 @@
-package util;
+package algo.genetic;
 
 /**
  * Created by sam on 17/05/17.

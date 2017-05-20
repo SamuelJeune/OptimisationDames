@@ -1,7 +1,8 @@
 package algo.tabou;
 
-import util.Action;
-import util.Util;
+import checkers.Action;
+import checkers.Checkers;
+import checkers.Util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,34 +11,33 @@ import java.util.Arrays;
  * Created by Sam on 20/03/2017.
  */
 public class Tabou {
-    private int i =0;
     private int nmax;
     private ArrayList<Action> T = new ArrayList<>();
-    private int[] solInitial;
-    private int[] solFinal;
+    private Checkers solInitial;
+    private Checkers solFinal;
     private int n;
+    private int nbIteration;
 
     public Tabou(int nmax, int n) {
-        this.i = 0;
         this.nmax = nmax;
-        solInitial= Util.getInitSolution(n);
         this.n=n;
-        AlgoTabou();
-        solFinal=solInitial;
+        solInitial= new Checkers(n);
+        solFinal=solInitial.clone();
+        nbIteration = 0;
     }
 
-    public void AlgoTabou(){
+    public void algoTabou(){
         solFinal=solInitial;
         int currentFitness = Integer.MAX_VALUE;
         int fitnessMin = Integer.MAX_VALUE;
         int fitness;
         Action action;
-        int[] solCandidate;
+        Checkers solCandidate;
         ArrayList<Action> actions = Util.getListActions(n,T);
-        while(i!=nmax && currentFitness>0 && actions.size()>0){
-            action = Util.getBestAction(solFinal, n,actions);
-            solCandidate=Util.getNeighborByAction(action,solFinal);
-            fitness = Util.getFitness(solCandidate,n);
+        while(nbIteration!=nmax && currentFitness>0 && actions.size()>0){
+            action = Util.getBestAction(solFinal, actions);
+            solCandidate=Util.getNeighborByAction(solFinal, action);
+            fitness = solCandidate.getFitness();
             if(fitness<=currentFitness){
                 T.add(new Action(action.getA(),action.getB()));
             }
@@ -50,13 +50,19 @@ public class Tabou {
             }
             currentFitness = fitness;
             actions = Util.getListActions(n,T);
-            i++;
+            nbIteration++;
         }
-        System.out.println("nombre d'itération : "+i);
-        System.out.println(Arrays.toString(solFinal));
-        Util.affichagejolidetheo(solFinal);
-        System.out.println(Util.getFitness(solFinal, n));
     }
 
+    public void run(){
+        algoTabou();
+    }
 
+    public Checkers getSolFinal() {
+        return solFinal;
+    }
+
+    public int getNbIteration() {
+        return nbIteration;
+    }
 }

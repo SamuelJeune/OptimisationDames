@@ -1,7 +1,7 @@
 package algo.genetic;
 
-import util.Pair;
-import util.Util;
+import checkers.Checkers;
+import checkers.Util;
 
 import java.util.*;
 
@@ -12,8 +12,8 @@ public class Genetic {
 
     private final int NBSOLUTION=6;
     private final int NBCURRENTPOP=6;
-    private List<int[]> currentPop;
-    private List<int[]> choosenPop;
+    private List<Checkers> currentPop;
+    private List<Checkers> choosenPop;
     private Random random;
     private int n;
 
@@ -26,21 +26,18 @@ public class Genetic {
         while(true) {
             init();
             reproduction();
-            croisement();
-            mutation();
+            /*croisement();
+            mutation();*/
 
-            for (int[] solution : choosenPop) {
-                System.out.println(Util.getFitness(solution, n));
+            for (Checkers solution : choosenPop) {
+                System.out.println(solution.getFitness());
             }
         }
     }
 
     public void init(){
         for(int i=0; i<NBCURRENTPOP; i++){
-            int[] solution=new int[n];
-            for(int j=0; j<n; j++){
-                solution[j]=random.nextInt(n-1);
-            }
+            Checkers solution=new Checkers(n);
             currentPop.add(solution);
         }
     }
@@ -55,7 +52,7 @@ public class Genetic {
         List<Pair> fitness = new ArrayList<>();
         /** Create a list with the fitness of the current population */
         for (int i=0; i<currentPop.size(); i++) {
-            fitness.add(new Pair(Util.getFitness(currentPop.get(i), n), i));
+            fitness.add(new Pair(currentPop.get(i).getFitness(), i));
             //System.out.println(fitness.get(i).getKey()+":"+fitness.get(i).getValue()+" - ");
         }
         /** Sort the fitness list in a reverse order */
@@ -89,7 +86,7 @@ public class Genetic {
 
 
 
-    public void croisement(){
+    /*public void croisement(){
         for(int i=0; i<choosenPop.size(); i+=2){
             for(int j=random.nextInt(choosenPop.get(i).length); j<choosenPop.get(i).length;j++){
                 int x = choosenPop.get(i)[j];
@@ -105,5 +102,5 @@ public class Genetic {
         int rand2 = random.nextInt(choosenPop.get(rand).length-1);
         int rand3 = random.nextInt(n-1);
         choosenPop.get(rand)[rand2]=rand3;
-    }
+    }*/
 }
