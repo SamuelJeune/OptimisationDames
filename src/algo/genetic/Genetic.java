@@ -100,7 +100,7 @@ public class Genetic {
             board = new int[n];
             /**we draw the number of value we'll take on the first relative */
             int rand1 = random.nextInt(n);
-            /**then we draw the beging of the values we'll take on the first relative
+            /**then we draw the first index of the values we'll take on the first relative
             (all the other values will came from the second relative*/
             int rand2 = random.nextInt(n-rand1);
             for(int j=rand2;j<rand1+rand2;j++){
