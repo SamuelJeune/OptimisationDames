@@ -1,5 +1,6 @@
 package algo.genetic;
 
+import checkers.Action;
 import checkers.Checkers;
 import checkers.Util;
 
@@ -10,33 +11,35 @@ import java.util.*;
  */
 public class Genetic {
 
-    private final int NBSOLUTION=6;
-    private final int NBCURRENTPOP=6;
+    private int nbPop;
     private List<Checkers> currentPop;
     private List<Checkers> choosenPop;
+    private final int nbIteration;
     private Random random;
     private int n;
+    private double mutationLuck;
 
-    public Genetic(int n) {
+    public Genetic(int n, int nbIteration, int nbPop, double mutationLuck) {
         this.n = n;
+        this.nbPop = nbPop;
+        this.nbIteration = nbIteration;
         this.currentPop=new ArrayList<>();
         this.choosenPop=new ArrayList<>();
         this.random=new Random();
+        this.mutationLuck = mutationLuck;
+    }
 
-        while(true) {
-            init();
+    public void algoGenetic(){
+        init();
+        for(int i=0;i<nbIteration && getBest().getFitness()>0;i++) {
             reproduction();
-            /*croisement();
-            mutation();*/
-
-            for (Checkers solution : choosenPop) {
-                System.out.println(solution.getFitness());
-            }
+            croisement();
+            mutation();
         }
     }
 
     public void init(){
-        for(int i=0; i<NBCURRENTPOP; i++){
+        for(int i=0; i<nbPop; i++){
             Checkers solution=new Checkers(n);
             currentPop.add(solution);
         }
@@ -56,17 +59,12 @@ public class Genetic {
             //System.out.println(fitness.get(i).getKey()+":"+fitness.get(i).getValue()+" - ");
         }
         /** Sort the fitness list in a reverse order */
-        fitness.sort(new Comparator<Pair>() {
-            @Override
-            public int compare(Pair o1, Pair o2) {
-                return o2.getValue()-o1.getValue();
-            }
-        });
+        fitness.sort((o1, o2) -> o2.getKey()-o1.getKey());
         /** Create a list weight for each solution that depends on their fitness */
         for (int i=0; i<fitness.size(); i++) {
             //System.out.println(fitness.get(i).getKey()+":"+fitness.get(i).getValue()+" - ");
             for(int j=0; j<=i; j++){
-                weightList.add(fitness.get(i).getKey());
+                weightList.add(fitness.get(i).getValue());
             }
         }
        /*for (int i=0; i<weightList.size(); i++){
@@ -74,8 +72,9 @@ public class Genetic {
         }*/
 
        /** Select the solution from the current population in function of their weight */
-        for(int i=0; i<NBSOLUTION;i++){
+        for(int i=0; i<2*nbPop;i++){
             int k = random.nextInt(weightList.size());
+//            System.out.println(weightList.get(k));
             choosenPop.add(currentPop.get(weightList.get(k)));
         }
 
@@ -86,21 +85,66 @@ public class Genetic {
 
 
 
-    /*public void croisement(){
-        for(int i=0; i<choosenPop.size(); i+=2){
-            for(int j=random.nextInt(choosenPop.get(i).length); j<choosenPop.get(i).length;j++){
-                int x = choosenPop.get(i)[j];
-                choosenPop.get(i)[j]=choosenPop.get(i+1)[j];
-                choosenPop.get(i+1)[j]=x;
+    public void croisement(){
+        int[] board;
+        int k;
+        ArrayList<Integer> usedList = new ArrayList<>();
+        currentPop.clear();
+        for(int i=0;i<nbPop*2;i+=2){
+            usedList.clear();
+            board = new int[n];
+            int rand1 = random.nextInt(n);
+            int rand2 = random.nextInt(n-rand1);
+            for(int j=rand2;j<rand1+rand2;j++){
+                board[j]=choosenPop.get(i).getBoard()[j];
+                usedList.add(board[j]);
             }
+            k=0;
+            for(int j=0;j<rand2;j++){
+                do{
+                    board[j]=choosenPop.get(i+1).getBoard()[k];
+                    k++;
+                } while(usedList.contains(board[j]));
+                usedList.add(board[j]);
+            }
+            k=n-1;
+            for(int j=n-1;j>=rand1+rand2;j--){
+                do{
+                    board[j]=choosenPop.get(i+1).getBoard()[k];
+                    k--;
+                } while(usedList.contains(board[j]));
+            }
+            currentPop.add(new Checkers(board,n));
         }
     }
 
 
     public void mutation(){
-        int rand = random.nextInt(choosenPop.size()-1);
-        int rand2 = random.nextInt(choosenPop.get(rand).length-1);
-        int rand3 = random.nextInt(n-1);
-        choosenPop.get(rand)[rand2]=rand3;
-    }*/
+        for(int i = 0; i<nbPop;i++){
+            double rand = random.nextDouble();
+            if(rand<mutationLuck){
+                int rand1 = random.nextInt(n);
+                int rand2 = random.nextInt(n);
+                currentPop.get(i).applyAction(new Action(rand1,rand2));
+            }
+        }
+    }
+
+    public Checkers getBest(){
+        Checkers best = null;
+        int currentFitness;
+        int bestFitness = Integer.MAX_VALUE;
+        for(int i=0;i<nbPop;i++){
+            currentFitness = currentPop.get(i).getFitness();
+            if(currentFitness<bestFitness){
+                bestFitness = currentFitness;
+                best = currentPop.get(i);
+            }
+        }
+        return best;
+    }
+
+    public void run(){
+        algoGenetic();
+    }
 }
