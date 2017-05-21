@@ -3,7 +3,7 @@ package algo.genetic;
 /**
  * Created by sam on 17/05/17.
  */
-public class Pair implements Comparable<Pair>{
+public class Pair{
 
     private int key;
     private int value;
@@ -19,11 +19,5 @@ public class Pair implements Comparable<Pair>{
 
     public int getValue() {
         return value;
-    }
-
-    @Override
-    public int compareTo(Pair o) {
-        if(o.getValue()<this.value) return 1;
-        return 0;
     }
 }
