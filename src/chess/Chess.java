@@ -78,6 +78,10 @@ public class Chess implements Cloneable{
         return new Chess(board.clone(),n);
     }
 
+    public boolean isSuccess(){
+        return getFitness()==0;
+    }
+
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder();

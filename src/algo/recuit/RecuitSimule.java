@@ -54,7 +54,6 @@ public class RecuitSimule {
                 }
             }
             temp=temp*mu;
-
         }
     }
 
