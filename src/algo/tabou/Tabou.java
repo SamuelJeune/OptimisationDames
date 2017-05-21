@@ -16,13 +16,15 @@ public class Tabou {
     private Chess solFinal;
     private int n;
     private int nbIteration;
+    private int t_size;
 
-    public Tabou(int nmax, int n) {
+    public Tabou(int nmax, int n, int tsize) {
         this.nmax = nmax;
         this.n=n;
         solInitial= new Chess(n);
         solFinal=solInitial.clone();
         nbIteration = 0;
+        this.t_size = tsize;
     }
 
     public void algoTabou(){
@@ -40,7 +42,7 @@ public class Tabou {
             if(fitness<=currentFitness){
                 T.add(new Action(action.getA(),action.getB()));
             }
-            if(T.size()>n-2){
+            if(T.size()>t_size-2){
                 T.remove(0);
             }
             if(fitness<=fitnessMin){
@@ -50,6 +52,7 @@ public class Tabou {
             currentFitness = fitness;
             actions = Util.getListActions(n,T);
             nbIteration++;
+            System.out.println(fitness);
         }
     }
 

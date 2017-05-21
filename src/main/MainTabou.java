@@ -8,12 +8,13 @@ import algo.tabou.Tabou;
 public class MainTabou {
 
 
-    private final static int N = 100;
-    private final static int N_MAX = 500;
+    private final static int N = 1000; // taille de la grille
+    private final static int N_MAX = 500; // nb max d'itération
+    private final static int T_SIZE = 100; // taille de la liste tabou
 
     public static void main(String[] args){
         long startTime = System.currentTimeMillis();
-        Tabou tabou = new algo.tabou.Tabou(N_MAX, N);
+        Tabou tabou = new algo.tabou.Tabou(N_MAX, N, T_SIZE);
         tabou.run();
         long endTime = System.currentTimeMillis();
         System.out.println(tabou.getSolFinal());

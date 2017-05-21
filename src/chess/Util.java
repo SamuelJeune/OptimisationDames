@@ -40,10 +40,13 @@ public class Util {
 
     public static ArrayList<Action> getListActions(int n, ArrayList<Action> tabouList){
         Action action;
+        Random random = new Random();
+        int rand1=random.nextInt(n-20);
+
         ArrayList<Action> actions = new ArrayList<>();
-        for(int i = 0;i<n;i++){
-            for(int j = i+1;j<n;j++){
-                action = new Action(i,j);
+        for(int i = 0;i<20;i++){
+            for(int j = i+1;j<20;j++){
+                action = new Action(rand1+i,rand1+j);
                 if(!isTabou(tabouList,action)) {
                     actions.add(action);
                 }
