@@ -1,26 +1,25 @@
-package checkers;
+package chess;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
  * Created by hagoterio on 20/05/17.
  */
-public class Checkers implements Cloneable{
+public class Chess implements Cloneable{
 
     private int[] board;
     private int n;
     private int fitness;
     private boolean changed;
 
-    public Checkers(int[] board, int n) {
+    public Chess(int[] board, int n) {
         this.board = board;
         this.n = n;
         changed = true;
     }
 
-    public Checkers(int n) {
+    public Chess(int n) {
         this.n = n;
         this.board = new int[n];
         changed = true;
@@ -75,8 +74,8 @@ public class Checkers implements Cloneable{
         changed = true;
     }
 
-    public Checkers clone() {
-        return new Checkers(board.clone(),n);
+    public Chess clone() {
+        return new Chess(board.clone(),n);
     }
 
     @Override

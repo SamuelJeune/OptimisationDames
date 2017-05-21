@@ -1,6 +1,4 @@
-package checkers;
-
-import checkers.Action;
+package chess;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,7 +8,7 @@ import java.util.Random;
  */
 public class Util {
 
-    public static Checkers getRandNeighbor(Checkers sol){
+    public static Chess getRandNeighbor(Chess sol){
         Random random = new Random();
         int rand1 = random.nextInt(sol.getSize()-1);
         int rand2 = random.nextInt(sol.getSize()-1);
@@ -18,14 +16,14 @@ public class Util {
         return  getNeighborByAction(sol,action);
     }
 
-    public static Checkers getNeighborByAction(Checkers currentSol, Action action){
-        Checkers newSol = currentSol.clone();
+    public static Chess getNeighborByAction(Chess currentSol, Action action){
+        Chess newSol = currentSol.clone();
         newSol.applyAction(action);
         return newSol;
     }
 
-    public static Action getBestAction(Checkers solution, ArrayList<Action> actions){
-        Checkers currentSolution;
+    public static Action getBestAction(Chess solution, ArrayList<Action> actions){
+        Chess currentSolution;
         int bestFitness = Integer.MAX_VALUE;
         int currentFitness;
         Action bestAction = null;

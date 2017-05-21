@@ -1,19 +1,18 @@
 package algo.recuit;
 
-import checkers.Checkers;
+import chess.Chess;
 
-import java.util.Arrays;
 import java.util.Random;
 
-import static checkers.Util.getRandNeighbor;
+import static chess.Util.getRandNeighbor;
 
 /**
  * Created by sam on 15/03/17.
  */
 public class RecuitSimule {
 
-    private Checkers solInitial;
-    private Checkers solFinal;
+    private Chess solInitial;
+    private Chess solFinal;
     private double t0;
     private int n;
     private int maxIteration;
@@ -24,7 +23,7 @@ public class RecuitSimule {
 
     public RecuitSimule(int n, int maxIteration, double tempInit, double mu){
         this.n=n;
-        solInitial = new Checkers(n);
+        solInitial = new Chess(n);
         this.maxIteration=maxIteration;
         this.t0=tempInit;
         this.mu=mu;
@@ -34,8 +33,8 @@ public class RecuitSimule {
 
     public void algoRecuit(){
         double temp=t0;
-        Checkers solActuel = solInitial.clone();
-        Checkers solCandidate;
+        Chess solActuel = solInitial.clone();
+        Chess solCandidate;
         int fitnessFinal = solFinal.getFitness();
         int dFitness;
         while(temp>0.2){
@@ -63,7 +62,7 @@ public class RecuitSimule {
         algoRecuit();
     }
 
-    public Checkers getSolFinal() {
+    public Chess getSolFinal() {
         return solFinal;
     }
 }

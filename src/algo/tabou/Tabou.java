@@ -1,11 +1,10 @@
 package algo.tabou;
 
-import checkers.Action;
-import checkers.Checkers;
-import checkers.Util;
+import chess.Action;
+import chess.Chess;
+import chess.Util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by Sam on 20/03/2017.
@@ -13,15 +12,15 @@ import java.util.Arrays;
 public class Tabou {
     private int nmax;
     private ArrayList<Action> T = new ArrayList<>();
-    private Checkers solInitial;
-    private Checkers solFinal;
+    private Chess solInitial;
+    private Chess solFinal;
     private int n;
     private int nbIteration;
 
     public Tabou(int nmax, int n) {
         this.nmax = nmax;
         this.n=n;
-        solInitial= new Checkers(n);
+        solInitial= new Chess(n);
         solFinal=solInitial.clone();
         nbIteration = 0;
     }
@@ -32,7 +31,7 @@ public class Tabou {
         int fitnessMin = Integer.MAX_VALUE;
         int fitness;
         Action action;
-        Checkers solCandidate;
+        Chess solCandidate;
         ArrayList<Action> actions = Util.getListActions(n,T);
         while(nbIteration!=nmax && currentFitness>0 && actions.size()>0){
             action = Util.getBestAction(solFinal, actions);
@@ -58,7 +57,7 @@ public class Tabou {
         algoTabou();
     }
 
-    public Checkers getSolFinal() {
+    public Chess getSolFinal() {
         return solFinal;
     }
 

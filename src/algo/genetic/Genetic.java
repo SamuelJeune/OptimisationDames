@@ -1,8 +1,7 @@
 package algo.genetic;
 
-import checkers.Action;
-import checkers.Checkers;
-import checkers.Util;
+import chess.Action;
+import chess.Chess;
 
 import java.util.*;
 
@@ -12,8 +11,8 @@ import java.util.*;
 public class Genetic {
 
     private int nbPop;
-    private List<Checkers> currentPop;
-    private List<Checkers> choosenPop;
+    private List<Chess> currentPop;
+    private List<Chess> choosenPop;
     private final int nbIteration;
     private Random random;
     private int n;
@@ -40,7 +39,7 @@ public class Genetic {
 
     public void init(){
         for(int i=0; i<nbPop; i++){
-            Checkers solution=new Checkers(n);
+            Chess solution=new Chess(n);
             currentPop.add(solution);
         }
     }
@@ -122,7 +121,7 @@ public class Genetic {
                     k--;
                 } while(usedList.contains(board[j]));
             }
-            currentPop.add(new Checkers(board,n));
+            currentPop.add(new Chess(board,n));
         }
     }
 
@@ -138,8 +137,8 @@ public class Genetic {
         }
     }
 
-    public Checkers getBest(){
-        Checkers best = null;
+    public Chess getBest(){
+        Chess best = null;
         int currentFitness;
         int bestFitness = Integer.MAX_VALUE;
         for(int i=0;i<nbPop;i++){
