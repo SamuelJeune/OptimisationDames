@@ -41,11 +41,15 @@ public class Util {
     public static ArrayList<Action> getListActions(int n, ArrayList<Action> tabouList){
         Action action;
         Random random = new Random();
-        int rand1=random.nextInt(n-20);
-
+        int rand1 = 0;
+        int k=n;
+        if(n>20){
+            rand1=random.nextInt(n-20);
+            k=20;
+        }
         ArrayList<Action> actions = new ArrayList<>();
-        for(int i = 0;i<20;i++){
-            for(int j = i+1;j<20;j++){
+        for(int i = 0;i<k;i++){
+            for(int j = i+1;j<k;j++){
                 action = new Action(rand1+i,rand1+j);
                 if(!isTabou(tabouList,action)) {
                     actions.add(action);
