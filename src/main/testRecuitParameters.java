@@ -22,6 +22,7 @@ public class testRecuitParameters {
         double[] tabMu = new double[]{0.2,0.5,0.7,0.8,0.9};
         int nbTest = 20;
 
+        /** test mu*/
         resetValues();;
 
         for(int l=0;l<tabMu.length;l++){
@@ -35,7 +36,7 @@ public class testRecuitParameters {
             System.out.println("temps d'execution moyen : " + Util.getTime(meanTime));
         }
 
-
+        /** test nbIteration*/
         resetValues();
 
         for(int i=0;i<tabIteration.length;i++){
