@@ -17,6 +17,9 @@ public class Genetic {
     private Random random;
     private int n;
     private double mutationLuck;
+    private Chess best;
+    private int bestFitness;
+
 
     public Genetic(int n, int nbIteration, int nbPop, double mutationLuck) {
         this.n = n;
@@ -26,6 +29,8 @@ public class Genetic {
         this.choosenPop=new ArrayList<>();
         this.random=new Random();
         this.mutationLuck = mutationLuck;
+        this.best=null;
+        this.bestFitness = Integer.MAX_VALUE;
     }
 
     public void algoGenetic(){
@@ -35,6 +40,14 @@ public class Genetic {
             croisement();
             mutation();
         }
+        /*int i=0;
+        while(getBest().getFitness()!=0){
+            reproduction();
+            croisement();
+            mutation();
+            System.out.println("iteration : " + i + " ; fitness : " + getBest().getFitness());
+            i++;
+        }*/
     }
 
     public void init(){
@@ -138,12 +151,11 @@ public class Genetic {
     }
 
     public Chess getBest(){
-        Chess best = null;
         int currentFitness;
-        int bestFitness = Integer.MAX_VALUE;
         for(int i=0;i<nbPop;i++){
             currentFitness = currentPop.get(i).getFitness();
             if(currentFitness<bestFitness){
+                //System.out.println("current : " + currentFitness + " ; best : " + bestFitness);
                 bestFitness = currentFitness;
                 best = currentPop.get(i);
             }
