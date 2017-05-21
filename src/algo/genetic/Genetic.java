@@ -40,14 +40,6 @@ public class Genetic {
             croisement();
             mutation();
         }
-        /*int i=0;
-        while(getBest().getFitness()!=0){
-            reproduction();
-            croisement();
-            mutation();
-            System.out.println("iteration : " + i + " ; fitness : " + getBest().getFitness());
-            i++;
-        }*/
     }
 
     public void init(){
@@ -68,31 +60,21 @@ public class Genetic {
         /** Create a list with the fitness of the current population */
         for (int i=0; i<currentPop.size(); i++) {
             fitness.add(new Pair(currentPop.get(i).getFitness(), i));
-            //System.out.println(fitness.get(i).getKey()+":"+fitness.get(i).getValue()+" - ");
         }
         /** Sort the fitness list in a reverse order */
         fitness.sort((o1, o2) -> o2.getKey()-o1.getKey());
         /** Create a list weight for each solution that depends on their fitness */
         for (int i=0; i<fitness.size(); i++) {
-            //System.out.println(fitness.get(i).getKey()+":"+fitness.get(i).getValue()+" - ");
             for(int j=0; j<=i; j++){
                 weightList.add(fitness.get(i).getValue());
             }
         }
-       /*for (int i=0; i<weightList.size(); i++){
-            System.out.println(weightList.get(i));
-        }*/
 
        /** Select the solution from the current population in function of their weight */
         for(int i=0; i<2*nbPop;i++){
             int k = random.nextInt(weightList.size());
-//            System.out.println(weightList.get(k));
             choosenPop.add(currentPop.get(weightList.get(k)));
         }
-
-        /*for (int[] aChoosenPop : choosenPop) {
-            System.out.println(Arrays.toString(aChoosenPop));
-        }*/
     }
 
 
