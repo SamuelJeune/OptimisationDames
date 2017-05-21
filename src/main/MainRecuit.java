@@ -8,13 +8,14 @@ import algo.recuit.RecuitSimule;
 public class MainRecuit {
 
     private final static int N = 100;
-    private final static int MAX_ITERATION = 10000;
+    private final static int MAX_ITERATION = 200*N;
     private final static int TEMP_INIT = 10000;
-    private final static double MU = 0.7;
+    private final static double MU = 0.8;
+    private final static double TEMP_FINAL = 0.08;
 
     public static void main(String[] args){
         long startTime = System.currentTimeMillis();
-       RecuitSimule recuitSimule = new RecuitSimule(N,MAX_ITERATION,TEMP_INIT,MU);
+       RecuitSimule recuitSimule = new RecuitSimule(N,MAX_ITERATION,TEMP_INIT,MU,TEMP_FINAL);
        recuitSimule.run();
         long endTime = System.currentTimeMillis();
        System.out.println(recuitSimule.getSolFinal());

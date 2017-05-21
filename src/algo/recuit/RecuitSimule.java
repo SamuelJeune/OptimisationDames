@@ -14,6 +14,7 @@ public class RecuitSimule {
     private Chess solInitial;
     private Chess solFinal;
     private double t0;
+    private double tEnd;
     private int n;
     private int maxIteration;
     private double mu;
@@ -21,13 +22,14 @@ public class RecuitSimule {
 
 
 
-    public RecuitSimule(int n, int maxIteration, double tempInit, double mu){
+    public RecuitSimule(int n, int maxIteration, double tempInit, double mu, double tempFinal){
         this.n=n;
         solInitial = new Chess(n);
         this.maxIteration=maxIteration;
         this.t0=tempInit;
         this.mu=mu;
         this.solFinal=solInitial;
+        this.tEnd = tempFinal;
     }
 
 
@@ -37,8 +39,8 @@ public class RecuitSimule {
         Chess solCandidate;
         int fitnessFinal = solFinal.getFitness();
         int dFitness;
-        while(temp>0.2){
-            for(int l=1; l<maxIteration;l++){
+        while(temp>tEnd && solFinal.getFitness()>0){
+            for(int l=1; l<maxIteration && solFinal.getFitness()>0;l++){
                 solCandidate= getRandNeighbor(solActuel);
                 dFitness = solCandidate.getFitness()-solActuel.getFitness();
                 if(dFitness<=0){
