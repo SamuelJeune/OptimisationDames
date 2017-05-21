@@ -137,7 +137,6 @@ public class Genetic {
         for(int i=0;i<nbPop;i++){
             currentFitness = currentPop.get(i).getFitness();
             if(currentFitness<bestFitness){
-                //System.out.println("current : " + currentFitness + " ; best : " + bestFitness);
                 bestFitness = currentFitness;
                 best = currentPop.get(i);
             }
