@@ -71,6 +71,7 @@ public class Genetic {
         }
 
        /** Select the solution from the current population in function of their weight */
+       choosenPop.clear();
         for(int i=0; i<2*nbPop;i++){
             int k = random.nextInt(weightList.size());
             choosenPop.add(currentPop.get(weightList.get(k)));

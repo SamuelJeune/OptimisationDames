@@ -1,19 +1,18 @@
 package main;
 
-import algo.recuit.RecuitSimule;
+import algo.genetic.Genetic;
 
 /**
- * Created by hagoterio on 21/05/17.
+ * Created by hagoterio on 22/05/17.
  */
-public class TestRecuit {
+public class TestGenetic {
+
     private static int n;
-    private static int nbIteration;
-    private static int tempInit;
-    private static double mu;
-    private static int nbTest = 10;
-    private static long meanTime;
+    private static int nbGeneration;
+    private static double mutationLuck;
+    private static int nbPop;
+    private static int nbTest = 20;
     private static int nbFailure;
-    private static double tempFinal;
 
     public static void main(String[] args){
         int[] tabN = new int[]{20,50,100,200,400,500};
@@ -30,26 +29,28 @@ public class TestRecuit {
     }
 
     private static void resetValues(){
-        nbIteration = 200*n;
-        tempInit = 10000;
-        mu = 0.8;
-        tempFinal = 0.08;
+        nbGeneration = 50;
+        nbPop = 100;
+        mutationLuck = 0.05;
     }
 
     private static void execute(){
-        meanTime = 0;
+        long meanTime = 0;
+        long meanFitness = 0;
         nbFailure = 0;
         for(int k=0;k<nbTest;k++){
             long startTime = System.currentTimeMillis();
-            RecuitSimule recuitSimule = new RecuitSimule(n,nbIteration,tempInit,mu,tempFinal);
-            recuitSimule.run();
+            Genetic gen = new Genetic(n,nbGeneration,nbPop,mutationLuck);
+            gen.run();
             long endTime = System.currentTimeMillis();
-            if(!recuitSimule.getSolFinal().isSuccess()) nbFailure++;
+            if(!gen.getBest().isSuccess()) nbFailure++;
             meanTime += endTime - startTime;
+            meanFitness += gen.getBest().getFitness();
         }
         meanTime /= nbTest;
+        meanFitness /= nbTest;
         System.out.println("pourcentage de réussite = "+(100-(double)nbFailure*100/nbTest));
+        System.out.println("fitness moyenne = "+meanFitness);
         System.out.println("temps d'execution moyen : " + Util.getTime(meanTime));
     }
-
 }

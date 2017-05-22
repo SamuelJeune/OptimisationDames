@@ -12,8 +12,6 @@ public class TestRecuitParameters {
     private static int tempInit;
     private static double mu;
     private static int nbTest = 20;
-    private static long meanTime;
-    private static int nbFailure;
     private static double tempFinal;
 
     public static void main(String[] args){
@@ -78,8 +76,8 @@ public class TestRecuitParameters {
     }
 
     private static void execute(){
-        meanTime = 0;
-        nbFailure = 0;
+        long meanTime = 0;
+        int nbFailure = 0;
         for(int k=0;k<nbTest;k++){
             long startTime = System.currentTimeMillis();
             RecuitSimule recuitSimule = new RecuitSimule(n,nbIteration,tempInit,mu,tempFinal);
@@ -89,7 +87,7 @@ public class TestRecuitParameters {
             meanTime += endTime - startTime;
         }
         meanTime /= nbTest;
-        System.out.println("pourcentage de réussite = "+(100-(double)nbFailure*100/nbTest));
+        System.out.println("pourcentage de réussite = "+(100-(double) nbFailure *100/nbTest));
         System.out.println("temps d'execution moyen : " + Util.getTime(meanTime));
     }
 }

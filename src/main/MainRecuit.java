@@ -7,8 +7,8 @@ import algo.recuit.RecuitSimule;
  */
 public class MainRecuit {
 
-    private final static int N = 100;
-    private final static int MAX_ITERATION = 200*N;
+    private final static int N = 500;
+    private final static int MAX_ITERATION = (int)(300*Math.sqrt(4*N));
     private final static int TEMP_INIT = 10000;
     private final static double MU = 0.8;
     private final static double TEMP_FINAL = 0.08;
