@@ -42,7 +42,7 @@ public class Tabou {
             if(fitness<=currentFitness){
                 T.add(new Action(action.getA(),action.getB()));
             }
-            if(T.size()>t_size-2){
+            if(T.size()>t_size){
                 T.remove(0);
             }
             if(fitness<=fitnessMin){
@@ -52,7 +52,6 @@ public class Tabou {
             currentFitness = fitness;
             actions = Util.getListActions(n,T);
             nbIteration++;
-            System.out.println(fitness);
         }
     }
 
