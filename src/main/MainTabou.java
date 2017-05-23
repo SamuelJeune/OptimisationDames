@@ -10,9 +10,9 @@ import java.util.Arrays;
 public class MainTabou {
 
 
-    private final static int N = 500; // taille de l'echiquier
+    private final static int N = 15; // taille de l'echiquier
     private final static int N_MAX = 5*N; // nb max d'itération
-    private final static int T_SIZE = N/10; // taille de la liste tabou
+    private final static int T_SIZE = Math.max(N/10,1); // taille de la liste tabou
 
     public static void main(String[] args){
         long startTime = System.currentTimeMillis();
